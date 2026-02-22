@@ -54,13 +54,17 @@ export default function LoginPage() {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-1.5">
-              <label className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Correo Electrónico</label>
+              <label className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                Correo Electrónico
+              </label>
               <input type="email" required autoFocus value={email} onChange={e => setEmail(e.target.value)}
                 placeholder="usuario@correo.com"
                 className="w-full px-3 py-2 rounded-md border bg-background text-sm outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors" />
             </div>
             <div className="space-y-1.5">
-              <label className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Contraseña</label>
+              <label className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                Contraseña
+              </label>
               <input type="password" required minLength={6} value={password} onChange={e => setPassword(e.target.value)}
                 placeholder="••••••••"
                 className="w-full px-3 py-2 rounded-md border bg-background text-sm outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors" />
@@ -70,25 +74,6 @@ export default function LoginPage() {
               {loading ? "Ingresando..." : "Ingresar al Sistema"}
             </button>
           </form>
-
-          {/* Credenciales de los dos roles */}
-          <div className="mt-5 pt-4 border-t space-y-2">
-            <p className="text-xs text-muted-foreground text-center font-medium mb-2">Cuentas de prueba</p>
-            <div className="rounded-md bg-muted/50 px-3 py-2 text-xs space-y-0.5">
-              <div className="flex justify-between items-center">
-                <span className="font-semibold text-foreground">Admin</span>
-                <span className="text-muted-foreground">acceso total</span>
-              </div>
-              <div><code className="bg-background border px-1 rounded">admin@abastosgest.com</code> / <code className="bg-background border px-1 rounded">admin123</code></div>
-            </div>
-            <div className="rounded-md bg-muted/50 px-3 py-2 text-xs space-y-0.5">
-              <div className="flex justify-between items-center">
-                <span className="font-semibold text-foreground">Vendedor</span>
-                <span className="text-muted-foreground">acceso limitado</span>
-              </div>
-              <div><code className="bg-background border px-1 rounded">vendedor@abastosgest.com</code> / <code className="bg-background border px-1 rounded">vendedor123</code></div>
-            </div>
-          </div>
         </div>
 
         <p className="text-center text-xs text-muted-foreground mt-5">
