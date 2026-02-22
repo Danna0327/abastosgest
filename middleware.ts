@@ -8,6 +8,9 @@ const JWT_SECRET = new TextEncoder().encode(
 // Rutas que NO requieren autenticación
 const PUBLIC_PATHS = ["/login", "/api/auth/login"]
 
+// Rutas exclusivas del admin — vendedor es redirigido al dashboard
+const ADMIN_ONLY_PATHS = ["/proveedores", "/api/proveedores"]
+
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl
 
@@ -23,16 +26,20 @@ export async function middleware(req: NextRequest) {
   const token = req.cookies.get("auth_token")?.value
 
   if (!token) {
-    // Sin token → redirigir al login
     return NextResponse.redirect(new URL("/login", req.url))
   }
 
   try {
-    // Verificar que el JWT sea válido y no haya expirado
-    await jwtVerify(token, JWT_SECRET)
+    const { payload } = await jwtVerify(token, JWT_SECRET)
+    const rol = payload.rol as string
+
+    // Vendedor intentando acceder a ruta exclusiva de admin
+    if (rol !== "admin" && ADMIN_ONLY_PATHS.some(p => pathname.startsWith(p))) {
+      return NextResponse.redirect(new URL("/?acceso=denegado", req.url))
+    }
+
     return NextResponse.next()
   } catch {
-    // Token inválido o expirado → redirigir al login
     const response = NextResponse.redirect(new URL("/login", req.url))
     response.cookies.delete("auth_token")
     return response
@@ -40,6 +47,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  // Aplicar middleware a todas las rutas excepto assets estáticos
   matcher: ["/((?!_next/static|_next/image|favicon.ico|public/).*)"],
 }

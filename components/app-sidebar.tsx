@@ -2,39 +2,29 @@
 
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
+import { LayoutDashboard, Package, ShoppingCart, Truck, Users, Store, LogOut } from "lucide-react"
 import {
-  LayoutDashboard,
-  Package,
-  ShoppingCart,
-  Truck,
-  Users,
-  Store,
-  LogOut,
-} from "lucide-react"
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarFooter,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
-  SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
+  Sidebar, SidebarContent, SidebarFooter, SidebarGroup,
+  SidebarGroupContent, SidebarGroupLabel, SidebarHeader,
+  SidebarMenu, SidebarMenuButton, SidebarMenuItem,
 } from "@/components/ui/sidebar"
+import { useSession } from "@/hooks/use-session"
 
-const navItems = [
-  { title: "Dashboard",   href: "/",            icon: LayoutDashboard },
-  { title: "Inventario",  href: "/inventario",  icon: Package },
-  { title: "Ventas",      href: "/ventas",       icon: ShoppingCart },
-  { title: "Compras",     href: "/compras",      icon: Truck },
-  { title: "Proveedores", href: "/proveedores",  icon: Users },
+const allNavItems = [
+  { title: "Dashboard",   href: "/",            icon: LayoutDashboard, adminOnly: false },
+  { title: "Inventario",  href: "/inventario",  icon: Package,         adminOnly: false },
+  { title: "Ventas",      href: "/ventas",       icon: ShoppingCart,    adminOnly: false },
+  { title: "Compras",     href: "/compras",      icon: Truck,           adminOnly: false },
+  { title: "Proveedores", href: "/proveedores",  icon: Users,           adminOnly: true  },
 ]
 
 export function AppSidebar() {
-  const pathname = usePathname()
-  const router   = useRouter()
+  const pathname    = usePathname()
+  const router      = useRouter()
+  const { user, isAdmin } = useSession()
+
+  // Filtrar items según el rol
+  const navItems = allNavItems.filter(item => !item.adminOnly || isAdmin)
 
   async function handleLogout() {
     await fetch("/api/auth/logout", { method: "POST" })
@@ -71,11 +61,7 @@ export function AppSidebar() {
                 <SidebarMenuItem key={item.href}>
                   <SidebarMenuButton
                     asChild
-                    isActive={
-                      item.href === "/"
-                        ? pathname === "/"
-                        : pathname.startsWith(item.href)
-                    }
+                    isActive={item.href === "/" ? pathname === "/" : pathname.startsWith(item.href)}
                     tooltip={item.title}
                   >
                     <Link href={item.href}>
@@ -92,6 +78,21 @@ export function AppSidebar() {
 
       <SidebarFooter>
         <SidebarMenu>
+          {/* Usuario activo */}
+          {user && (
+            <SidebarMenuItem>
+              <SidebarMenuButton size="lg" className="cursor-default">
+                <div className="flex items-center justify-center rounded-full bg-primary size-7 text-primary-foreground text-xs font-bold flex-shrink-0">
+                  {user.nombre.charAt(0).toUpperCase()}
+                </div>
+                <div className="flex flex-col gap-0.5 leading-none">
+                  <span className="text-sm font-medium">{user.nombre}</span>
+                  <span className="text-xs text-sidebar-foreground/60 capitalize">{user.rol}</span>
+                </div>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          )}
+          {/* Cerrar sesión */}
           <SidebarMenuItem>
             <SidebarMenuButton
               onClick={handleLogout}
