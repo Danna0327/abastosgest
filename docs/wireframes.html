@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Wireframes — AbastosGest</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', Arial, sans-serif; background: #1a1a2e; color: #ccc; padding: 30px 20px; }
+h1 { text-align: center; font-size: 22px; color: #e2e8f0; margin-bottom: 6px; }
+.meta { text-align: center; font-size: 12px; color: #64748b; margin-bottom: 40px; }
+.wireframes { display: flex; flex-wrap: wrap; gap: 40px; justify-content: center; }
+.wf-block { background: #0f1117; border: 1px solid #2a3148; border-radius: 10px; padding: 20px; width: 380px; }
+.wf-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #64748b; margin-bottom: 16px; text-align: center; border-bottom: 1px dashed #2a3148; padding-bottom: 10px; }
+
+/* Wireframe elements */
+.wf-screen { background: #171b25; border: 2px solid #3b82f6; border-radius: 6px; overflow: hidden; }
+.wf-bar    { height: 20px; background: #1e2435; border-bottom: 1px solid #2a3148; display: flex; align-items: center; padding: 0 8px; gap: 5px; }
+.wf-dot    { width: 6px; height: 6px; border-radius: 50%; }
+.wf-url    { flex: 1; height: 10px; background: #2a3148; border-radius: 3px; margin-left: 6px; }
+.box       { background: #2a3148; border-radius: 3px; }
+.box-blue  { background: #1e3a5f; border: 1px solid #3b82f6; border-radius: 3px; }
+.box-green { background: #1a2e1a; border: 1px solid #22c55e; border-radius: 3px; }
+.box-red   { background: #2d1a1a; border: 1px solid #ef4444; border-radius: 3px; }
+.line      { height: 8px; border-radius: 2px; margin: 4px 0; }
+.line-sm   { height: 6px; border-radius: 2px; margin: 3px 0; }
+label-wf   { font-size: 9px; color: #64748b; display: block; margin: 6px 0 2px; }
+
+/* ── WIREFRAME 1: LOGIN ── */
+.wf-login-body { padding: 20px; display: flex; flex-direction: column; align-items: center; gap: 12px; min-height: 300px; justify-content: center; background: repeating-linear-gradient(0deg, transparent, transparent 19px, #1e2435 20px), repeating-linear-gradient(90deg, transparent, transparent 19px, #1e2435 20px); }
+.wf-login-card { width: 220px; background: #1e2435; border: 1px solid #2a3148; border-radius: 6px; padding: 16px; }
+
+/* ── WIREFRAME 2: DASHBOARD ── */
+.wf-layout     { display: flex; min-height: 320px; }
+.wf-sidebar    { width: 70px; background: #1e2435; border-right: 1px solid #2a3148; padding: 8px 6px; display: flex; flex-direction: column; gap: 4px; }
+.wf-main       { flex: 1; padding: 10px; overflow: hidden; }
+.wf-topbar     { height: 22px; background: #1e2435; border-bottom: 1px solid #2a3148; margin: -10px -10px 10px; padding: 0 10px; display: flex; align-items: center; justify-content: space-between; }
+.wf-stats      { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 8px; }
+.wf-stat-card  { background: #1e2435; border: 1px solid #2a3148; border-radius: 4px; padding: 8px; }
+.wf-table-row  { display: flex; gap: 4px; padding: 4px 0; border-bottom: 1px solid #1e2435; }
+.wf-table-cell { flex: 1; height: 7px; background: #2a3148; border-radius: 2px; }
+
+/* ── WIREFRAME 3: MÓDULO (Inventario) ── */
+.wf-modal-overlay { position: relative; }
+.wf-modal { position: absolute; top: 30px; left: 40px; width: 200px; background: #1e2435; border: 2px solid #3b82f6; border-radius: 6px; padding: 10px; z-index: 10; }
+
+/* WIREFRAME 4: Menu usuarios */
+.wf-dropdown { position: relative; }
+.wf-dropdown-menu { position: absolute; right: 0; top: 28px; width: 130px; background: #1e2435; border: 1px solid #2a3148; border-radius: 4px; padding: 4px; z-index: 10; }
+</style>
+</head>
+<body>
+
+<h1>Wireframes — AbastosGest</h1>
+<p class="meta">Organización visual de pantallas · Sistema de Gestión Nancy Market</p>
+
+<div class="wireframes">
+
+  <!-- ══ WF 1: LOGIN ══ -->
+  <div class="wf-block">
+    <div class="wf-title">1. Pantalla de Login / Inicio</div>
+    <div class="wf-screen">
+      <div class="wf-bar">
+        <div class="wf-dot" style="background:#ef4444"></div>
+        <div class="wf-dot" style="background:#f59e0b"></div>
+        <div class="wf-dot" style="background:#22c55e"></div>
+        <div class="wf-url"></div>
+      </div>
+      <div class="wf-login-body">
+        <!-- Logo / Banner -->
+        <div style="text-align:center;margin-bottom:6px;">
+          <div style="width:40px;height:40px;background:#1e3a5f;border:2px solid #3b82f6;border-radius:8px;margin:0 auto 6px;display:flex;align-items:center;justify-content:center;font-size:18px;">▦</div>
+          <div class="box line" style="width:100px;margin:4px auto 2px;"></div>
+          <div class="box line-sm" style="width:70px;margin:0 auto;"></div>
+        </div>
+        <!-- Card -->
+        <div class="wf-login-card">
+          <div class="box line" style="width:80px;margin-bottom:10px;"></div>
+          <!-- Email field -->
+          <div style="margin-bottom:8px;">
+            <div class="box line-sm" style="width:50px;margin-bottom:3px;"></div>
+            <div style="height:22px;background:#0f1117;border:1px solid #3b82f6;border-radius:3px;padding:4px 8px;">
+              <div class="box line-sm" style="width:60%;"></div>
+            </div>
+          </div>
+          <!-- Password field -->
+          <div style="margin-bottom:10px;">
+            <div class="box line-sm" style="width:50px;margin-bottom:3px;"></div>
+            <div style="height:22px;background:#0f1117;border:1px solid #2a3148;border-radius:3px;padding:4px 8px;">
+              <div class="box line-sm" style="width:40%;background:#4b5563;"></div>
+            </div>
+          </div>
+          <!-- Botón -->
+          <div class="box-blue" style="height:28px;border-radius:4px;display:flex;align-items:center;justify-content:center;">
+            <div class="box line-sm" style="width:70%;background:#3b82f6;"></div>
+          </div>
+          <!-- Hint -->
+          <div style="margin-top:8px;padding-top:8px;border-top:1px dashed #2a3148;">
+            <div class="box line-sm" style="width:90%;margin:2px auto;"></div>
+          </div>
+        </div>
+        <!-- Footer -->
+        <div class="box line-sm" style="width:120px;margin-top:4px;"></div>
+      </div>
+    </div>
+    <div style="margin-top:10px;font-size:11px;color:#64748b;line-height:1.6;">
+      <b style="color:#94a3b8;">Elementos:</b><br>
+      • Banner con logo y nombre del sistema<br>
+      • Formulario: email + contraseña<br>
+      • Botón "Ingresar al Sistema"<br>
+      • Credenciales de prueba visibles<br>
+      • Footer con versión del proyecto
+    </div>
+  </div>
+
+  <!-- ══ WF 2: DASHBOARD (HOME) ══ -->
+  <div class="wf-block">
+    <div class="wf-title">2. Dashboard (HOME)</div>
+    <div class="wf-screen">
+      <div class="wf-bar">
+        <div class="wf-dot" style="background:#ef4444"></div>
+        <div class="wf-dot" style="background:#f59e0b"></div>
+        <div class="wf-dot" style="background:#22c55e"></div>
+        <div class="wf-url"></div>
+      </div>
+      <div class="wf-layout">
+        <!-- Sidebar -->
+        <div class="wf-sidebar">
+          <div style="height:22px;margin-bottom:8px;border-bottom:1px solid #2a3148;display:flex;align-items:center;justify-content:center;">
+            <div style="width:16px;height:16px;background:#3b82f6;border-radius:2px;"></div>
+          </div>
+          <!-- Nav items -->
+          <div class="box-blue line" style="width:100%;height:16px;"></div>
+          <div class="box line" style="width:100%;height:14px;"></div>
+          <div class="box line" style="width:100%;height:14px;"></div>
+          <div class="box line" style="width:100%;height:14px;"></div>
+          <div class="box line" style="width:100%;height:14px;"></div>
+          <div style="flex:1;"></div>
+          <!-- User info -->
+          <div style="border-top:1px solid #2a3148;padding-top:6px;display:flex;align-items:center;gap:4px;">
+            <div style="width:14px;height:14px;background:#3b82f6;border-radius:50%;flex-shrink:0;"></div>
+            <div style="flex:1;"><div class="box line-sm" style="width:100%;"></div></div>
+          </div>
+        </div>
+        <!-- Main content -->
+        <div class="wf-main">
+          <!-- Topbar -->
+          <div class="wf-topbar">
+            <div class="box line-sm" style="width:60px;"></div>
+            <div class="box line-sm" style="width:30px;"></div>
+          </div>
+          <!-- Stats grid 2x2 -->
+          <div class="wf-stats">
+            <div class="wf-stat-card">
+              <div class="box line-sm" style="width:60%;margin-bottom:4px;"></div>
+              <div class="box-blue line" style="width:70%;height:16px;"></div>
+              <div class="box line-sm" style="width:50%;margin-top:4px;"></div>
+            </div>
+            <div class="wf-stat-card">
+              <div class="box line-sm" style="width:60%;margin-bottom:4px;"></div>
+              <div class="box line" style="width:40%;height:16px;"></div>
+              <div class="box line-sm" style="width:50%;margin-top:4px;"></div>
+            </div>
+            <div class="wf-stat-card">
+              <div class="box line-sm" style="width:60%;margin-bottom:4px;"></div>
+              <div class="box line" style="width:55%;height:16px;"></div>
+              <div class="box line-sm" style="width:50%;margin-top:4px;"></div>
+            </div>
+            <div class="wf-stat-card">
+              <div class="box line-sm" style="width:60%;margin-bottom:4px;"></div>
+              <div class="box line" style="width:30%;height:16px;"></div>
+              <div class="box line-sm" style="width:50%;margin-top:4px;"></div>
+            </div>
+          </div>
+          <!-- Tabla alertas -->
+          <div style="background:#1e2435;border:1px solid #f59e0b;border-radius:4px;padding:6px;margin-bottom:6px;">
+            <div class="box line-sm" style="width:60%;background:#f59e0b;margin-bottom:5px;"></div>
+            <div class="wf-table-row"><div class="wf-table-cell"></div><div class="wf-table-cell"></div><div class="wf-table-cell"></div></div>
+            <div class="wf-table-row"><div class="wf-table-cell"></div><div class="wf-table-cell"></div><div class="wf-table-cell"></div></div>
+          </div>
+          <!-- Tabla ventas recientes -->
+          <div style="background:#1e2435;border:1px solid #2a3148;border-radius:4px;padding:6px;">
+            <div class="box line-sm" style="width:50%;margin-bottom:5px;"></div>
+            <div class="wf-table-row"><div class="wf-table-cell"></div><div class="wf-table-cell"></div><div class="wf-table-cell"></div><div class="wf-table-cell"></div></div>
+            <div class="wf-table-row"><div class="wf-table-cell"></div><div class="wf-table-cell"></div><div class="wf-table-cell"></div><div class="wf-table-cell"></div></div>
+            <div class="wf-table-row"><div class="wf-table-cell"></div><div class="wf-table-cell"></div><div class="wf-table-cell"></div><div class="wf-table-cell"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:10px;font-size:11px;color:#64748b;line-height:1.6;">
+      <b style="color:#94a3b8;">Elementos:</b><br>
+      • Banner/Sidebar fijo con logo y navegación<br>
+      • Topbar con título y alertas<br>
+      • 4 tarjetas KPI: ventas, productos, valor, proveedores<br>
+      • Tabla de alertas de stock bajo<br>
+      • Tabla de últimas 5 ventas<br>
+      • Footer con usuario y botón cerrar sesión
+    </div>
+  </div>
+
+  <!-- ══ WF 3: MÓDULO CON MODAL ══ -->
+  <div class="wf-block">
+    <div class="wf-title">3. Módulo Inventario (con modal)</div>
+    <div class="wf-screen" style="position:relative;">
+      <div class="wf-bar">
+        <div class="wf-dot" style="background:#ef4444"></div>
+        <div class="wf-dot" style="background:#f59e0b"></div>
+        <div class="wf-dot" style="background:#22c55e"></div>
+        <div class="wf-url"></div>
+      </div>
+      <div class="wf-layout" style="opacity:0.35;">
+        <div class="wf-sidebar" style="width:55px;">
+          <div style="height:18px;margin-bottom:6px;"></div>
+          <div class="box line" style="height:12px;width:100%;"></div>
+          <div class="box-blue line" style="height:12px;width:100%;"></div>
+          <div class="box line" style="height:12px;width:100%;"></div>
+          <div class="box line" style="height:12px;width:100%;"></div>
+        </div>
+        <div class="wf-main">
+          <div class="wf-topbar"><div class="box line-sm" style="width:60px;"></div></div>
+          <div style="display:flex;justify-content:flex-end;margin-bottom:6px;">
+            <div class="box-blue" style="width:80px;height:20px;border-radius:4px;"></div>
+          </div>
+          <div style="background:#1e2435;border:1px solid #2a3148;border-radius:4px;padding:6px;">
+            <div class="wf-table-row" style="border-bottom:1px solid #2a3148;padding-bottom:4px;margin-bottom:4px;">
+              <div class="wf-table-cell" style="background:#1e2435;border:1px solid #4b5563;"></div>
+              <div class="wf-table-cell" style="background:#1e2435;border:1px solid #4b5563;"></div>
+              <div class="wf-table-cell" style="background:#1e2435;border:1px solid #4b5563;"></div>
+            </div>
+            <div class="wf-table-row"><div class="wf-table-cell"></div><div class="wf-table-cell"></div><div class="wf-table-cell"></div></div>
+            <div class="wf-table-row" style="background:rgba(245,158,11,0.1)"><div class="wf-table-cell"></div><div class="wf-table-cell"></div><div class="wf-table-cell"></div></div>
+            <div class="wf-table-row"><div class="wf-table-cell"></div><div class="wf-table-cell"></div><div class="wf-table-cell"></div></div>
+          </div>
+        </div>
+      </div>
+      <!-- Modal superpuesto -->
+      <div style="position:absolute;inset:0;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;">
+        <div style="width:220px;background:#1e2435;border:2px solid #3b82f6;border-radius:6px;padding:12px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid #2a3148;">
+            <div class="box line-sm" style="width:80px;"></div>
+            <div style="width:14px;height:14px;background:#2a3148;border-radius:2px;"></div>
+          </div>
+          <!-- Formulario grid 2x2 -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px;">
+            <div style="grid-column:span 2;"><div class="box line-sm" style="width:40%;margin-bottom:3px;"></div><div style="height:18px;background:#0f1117;border:1px solid #2a3148;border-radius:3px;"></div></div>
+            <div><div class="box line-sm" style="width:60%;margin-bottom:3px;"></div><div style="height:18px;background:#0f1117;border:1px solid #2a3148;border-radius:3px;"></div></div>
+            <div><div class="box line-sm" style="width:60%;margin-bottom:3px;"></div><div style="height:18px;background:#0f1117;border:1px solid #2a3148;border-radius:3px;"></div></div>
+            <div><div class="box line-sm" style="width:60%;margin-bottom:3px;"></div><div style="height:18px;background:#0f1117;border:1px solid #2a3148;border-radius:3px;"></div></div>
+            <div><div class="box line-sm" style="width:60%;margin-bottom:3px;"></div><div style="height:18px;background:#0f1117;border:1px solid #2a3148;border-radius:3px;"></div></div>
+          </div>
+          <div style="display:flex;justify-content:flex-end;gap:6px;padding-top:8px;border-top:1px solid #2a3148;">
+            <div class="box" style="width:55px;height:22px;border-radius:3px;"></div>
+            <div class="box-blue" style="width:65px;height:22px;border-radius:3px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:10px;font-size:11px;color:#64748b;line-height:1.6;">
+      <b style="color:#94a3b8;">Elementos:</b><br>
+      • Tabla de productos con acciones<br>
+      • Fila resaltada en amarillo = stock bajo<br>
+      • Botón "+ Nuevo Producto"<br>
+      • Modal superpuesto con formulario grid<br>
+      • Botones Cancelar / Guardar en footer del modal
+    </div>
+  </div>
+
+  <!-- ══ WF 4: MENÚ DE USUARIOS ══ -->
+  <div class="wf-block">
+    <div class="wf-title">4. Menú / Roles de Usuarios</div>
+    <div class="wf-screen">
+      <div class="wf-bar">
+        <div class="wf-dot" style="background:#ef4444"></div>
+        <div class="wf-dot" style="background:#f59e0b"></div>
+        <div class="wf-dot" style="background:#22c55e"></div>
+        <div class="wf-url"></div>
+      </div>
+      <div style="padding:16px;">
+        <!-- Roles definidos -->
+        <div style="margin-bottom:14px;font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">Roles del Sistema</div>
+        <!-- Admin -->
+        <div style="background:#1e3a5f;border:1px solid #3b82f6;border-radius:6px;padding:10px;margin-bottom:8px;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+            <div style="width:24px;height:24px;background:#3b82f6;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;font-weight:700;">A</div>
+            <div><div class="box line" style="width:70px;background:#3b82f6;margin-bottom:2px;"></div><div class="box line-sm" style="width:50px;background:#1e3a5f;border:1px solid #3b82f6;"></div></div>
+          </div>
+          <div style="font-size:10px;color:#94a3b8;margin-bottom:4px;">Acceso completo:</div>
+          <div style="display:flex;flex-wrap:wrap;gap:4px;">
+            <div style="background:#0f1117;border:1px solid #3b82f6;border-radius:3px;padding:2px 6px;font-size:9px;color:#3b82f6;">Dashboard</div>
+            <div style="background:#0f1117;border:1px solid #3b82f6;border-radius:3px;padding:2px 6px;font-size:9px;color:#3b82f6;">Inventario</div>
+            <div style="background:#0f1117;border:1px solid #3b82f6;border-radius:3px;padding:2px 6px;font-size:9px;color:#3b82f6;">Ventas</div>
+            <div style="background:#0f1117;border:1px solid #3b82f6;border-radius:3px;padding:2px 6px;font-size:9px;color:#3b82f6;">Compras</div>
+            <div style="background:#0f1117;border:1px solid #3b82f6;border-radius:3px;padding:2px 6px;font-size:9px;color:#3b82f6;">Proveedores</div>
+          </div>
+        </div>
+        <!-- Vendedor -->
+        <div style="background:#1a2e1a;border:1px solid #22c55e;border-radius:6px;padding:10px;margin-bottom:14px;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+            <div style="width:24px;height:24px;background:#22c55e;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;color:#000;font-weight:700;">V</div>
+            <div><div class="box line" style="width:60px;background:#22c55e;margin-bottom:2px;"></div><div class="box line-sm" style="width:50px;background:#1a2e1a;border:1px solid #22c55e;"></div></div>
+          </div>
+          <div style="font-size:10px;color:#94a3b8;margin-bottom:4px;">Acceso limitado:</div>
+          <div style="display:flex;flex-wrap:wrap;gap:4px;">
+            <div style="background:#0f1117;border:1px solid #22c55e;border-radius:3px;padding:2px 6px;font-size:9px;color:#22c55e;">Dashboard</div>
+            <div style="background:#0f1117;border:1px solid #22c55e;border-radius:3px;padding:2px 6px;font-size:9px;color:#22c55e;">Ventas</div>
+            <div style="background:#2d1a1a;border:1px dashed #4b5563;border-radius:3px;padding:2px 6px;font-size:9px;color:#64748b;text-decoration:line-through;">Compras</div>
+            <div style="background:#2d1a1a;border:1px dashed #4b5563;border-radius:3px;padding:2px 6px;font-size:9px;color:#64748b;text-decoration:line-through;">Config</div>
+          </div>
+        </div>
+        <!-- Sidebar usuario actual -->
+        <div style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;">Visualización en Sidebar</div>
+        <div style="background:#1e2435;border:1px solid #2a3148;border-radius:6px;overflow:hidden;">
+          <div style="background:#171b25;padding:8px 10px;border-bottom:1px solid #2a3148;display:flex;align-items:center;gap:8px;">
+            <div style="font-size:16px;color:#3b82f6;">▦</div>
+            <div class="box line" style="width:70px;"></div>
+          </div>
+          <div style="padding:6px 8px;display:flex;flex-direction:column;gap:3px;">
+            <div style="padding:5px 6px;background:#1e3a5f;border-left:3px solid #3b82f6;border-radius:3px;display:flex;align-items:center;gap:6px;"><div class="box line-sm" style="width:50px;"></div></div>
+            <div style="padding:5px 6px;display:flex;align-items:center;gap:6px;"><div class="box line-sm" style="width:50px;"></div></div>
+            <div style="padding:5px 6px;display:flex;align-items:center;gap:6px;"><div class="box line-sm" style="width:50px;"></div></div>
+          </div>
+          <div style="padding:8px 10px;border-top:1px solid #2a3148;display:flex;align-items:center;gap:8px;">
+            <div style="width:22px;height:22px;background:#3b82f6;border-radius:50%;flex-shrink:0;"></div>
+            <div style="flex:1;"><div class="box line-sm" style="width:70%;margin-bottom:2px;"></div><div class="box line-sm" style="width:40%;background:#1e2435;border:1px solid #2a3148;"></div></div>
+            <div class="box line-sm" style="width:20px;background:#2d1a1a;border:1px solid #ef4444;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:10px;font-size:11px;color:#64748b;line-height:1.6;">
+      <b style="color:#94a3b8;">Elementos:</b><br>
+      • 2 roles: Admin (acceso total) y Vendedor<br>
+      • Badges de permisos por módulo<br>
+      • Sidebar con usuario activo, avatar inicial<br>
+      • Ítem activo resaltado en azul<br>
+      • Botón de cerrar sesión (rojo) al pie
+    </div>
+  </div>
+
+</div>
+
+<div style="text-align:center;margin-top:40px;font-size:12px;color:#4b5563;">
+  AbastosGest v1.0 · Proyecto Final Ingeniería en Sistemas · Wireframes de baja-media fidelidad
+</div>
+
+</body>
+</html>

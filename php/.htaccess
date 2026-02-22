@@ -1,0 +1,21 @@
+Options -Indexes
+
+# Proteger archivos de configuración
+<FilesMatch "\.(php|env|sql|log)$">
+    <RequireAll>
+        Require all granted
+    </RequireAll>
+</FilesMatch>
+
+# Bloquear acceso directo a carpetas sensibles
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^(config|models|controllers|views)/ - [F,L]
+</IfModule>
+
+# Cache para assets estáticos
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css "access plus 1 week"
+    ExpiresByType application/javascript "access plus 1 week"
+</IfModule>

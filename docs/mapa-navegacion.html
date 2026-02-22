@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Mapa de Navegación — AbastosGest</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #0f1117; color: #e2e8f0; padding: 40px 20px; }
+  h1 { text-align: center; font-size: 20px; color: #e2e8f0; margin-bottom: 6px; }
+  .subtitle { text-align: center; font-size: 13px; color: #64748b; margin-bottom: 40px; }
+
+  svg { display: block; margin: 0 auto; width: 100%; max-width: 900px; }
+
+  /* Nodos */
+  .node-public  { fill: #1e3a5f; stroke: #3b82f6; stroke-width: 2; }
+  .node-private { fill: #1a2e1a; stroke: #22c55e; stroke-width: 2; }
+  .node-module  { fill: #1e2435; stroke: #64748b; stroke-width: 1.5; }
+  .node-action  { fill: #171b25; stroke: #4b5563; stroke-width: 1; }
+  .node-db      { fill: #2d1a1a; stroke: #ef4444; stroke-width: 1.5; rx: 20; }
+
+  text { font-family: 'Segoe UI', Arial, sans-serif; fill: #e2e8f0; font-size: 12px; text-anchor: middle; dominant-baseline: central; }
+  text.small { font-size: 10px; fill: #94a3b8; }
+  text.label { font-size: 11px; fill: #64748b; }
+
+  line, path { stroke-linecap: round; }
+  .arrow-main { stroke: #3b82f6; stroke-width: 2; fill: none; marker-end: url(#arrow-blue); }
+  .arrow-sub  { stroke: #64748b;  stroke-width: 1.5; fill: none; marker-end: url(#arrow-gray); stroke-dasharray: 5,3; }
+  .arrow-auth { stroke: #f59e0b;  stroke-width: 2; fill: none; marker-end: url(#arrow-yellow); }
+  .arrow-db   { stroke: #ef4444;  stroke-width: 1.5; fill: none; marker-end: url(#arrow-red); stroke-dasharray: 3,3; }
+
+  .legend { display: flex; gap: 24px; justify-content: center; margin-top: 28px; flex-wrap: wrap; }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #94a3b8; }
+  .legend-box  { width: 20px; height: 12px; border-radius: 2px; border: 2px solid; }
+</style>
+</head>
+<body>
+
+<h1>▦ Mapa de Navegación — AbastosGest</h1>
+<p class="subtitle">Sistema de Gestión de Abarrotes "Nancy Market" · Arquitectura MVC · PHP + PostgreSQL</p>
+
+<svg viewBox="0 0 880 680" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow-blue"   markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#3b82f6"/></marker>
+    <marker id="arrow-gray"   markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#64748b"/></marker>
+    <marker id="arrow-yellow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#f59e0b"/></marker>
+    <marker id="arrow-red"    markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#ef4444"/></marker>
+  </defs>
+
+  <!-- ── ZONA PÚBLICA ── -->
+  <rect x="10" y="10" width="860" height="100" rx="8" fill="none" stroke="#1e3a5f" stroke-width="1" stroke-dasharray="6,4"/>
+  <text x="60" y="28" class="label">ZONA PÚBLICA</text>
+
+  <!-- Entrada / index.php -->
+  <rect x="360" y="25" width="160" height="50" rx="6" class="node-public"/>
+  <text x="440" y="46" font-weight="600" font-size="13">index.php</text>
+  <text x="440" y="62" class="small">Front Controller / Router</text>
+
+  <!-- Login -->
+  <rect x="140" y="25" width="140" height="50" rx="6" class="node-public"/>
+  <text x="210" y="46" font-weight="600">Login</text>
+  <text x="210" y="62" class="small">AuthController</text>
+
+  <!-- Flecha Entrada → Login (si no hay sesión) -->
+  <path d="M360,50 L282,50" class="arrow-auth"/>
+  <text x="321" y="43" class="small" fill="#f59e0b">sin sesión</text>
+
+  <!-- ── ZONA PRIVADA ── -->
+  <rect x="10" y="125" width="860" height="390" rx="8" fill="none" stroke="#1a2e1a" stroke-width="1" stroke-dasharray="6,4"/>
+  <text x="60" y="143" class="label">ZONA PRIVADA (requiere sesión activa)</text>
+
+  <!-- Dashboard -->
+  <rect x="340" y="155" width="200" height="50" rx="6" class="node-module"/>
+  <text x="440" y="175" font-weight="600">Dashboard</text>
+  <text x="440" y="191" class="small">DashboardController</text>
+
+  <!-- Flecha Login aprobado → Dashboard -->
+  <path d="M440,75 L440,155" class="arrow-main"/>
+  <text x="462" y="115" class="small" fill="#22c55e">login ok</text>
+
+  <!-- Módulos principales -->
+  <!-- Inventario -->
+  <rect x="40" y="250" width="170" height="50" rx="6" class="node-module"/>
+  <text x="125" y="270" font-weight="600">Inventario</text>
+  <text x="125" y="286" class="small">InventarioController</text>
+
+  <!-- Ventas -->
+  <rect x="230" y="250" width="160" height="50" rx="6" class="node-module"/>
+  <text x="310" y="270" font-weight="600">Ventas</text>
+  <text x="310" y="286" class="small">VentasController</text>
+
+  <!-- Compras -->
+  <rect x="490" y="250" width="160" height="50" rx="6" class="node-module"/>
+  <text x="570" y="270" font-weight="600">Compras</text>
+  <text x="570" y="286" class="small">ComprasController</text>
+
+  <!-- Proveedores -->
+  <rect x="670" y="250" width="170" height="50" rx="6" class="node-module"/>
+  <text x="755" y="270" font-weight="600">Proveedores</text>
+  <text x="755" y="286" class="small">ProveedoresController</text>
+
+  <!-- Flechas Dashboard → Módulos -->
+  <path d="M390,205 L125,250" class="arrow-sub"/>
+  <path d="M420,205 L310,250" class="arrow-sub"/>
+  <path d="M460,205 L570,250" class="arrow-sub"/>
+  <path d="M490,205 L755,250" class="arrow-sub"/>
+
+  <!-- Acciones Inventario -->
+  <rect x="20" y="345" width="90" height="36" rx="4" class="node-action"/>
+  <text x="65" y="363" class="small">Listar</text>
+  <rect x="120" y="345" width="90" height="36" rx="4" class="node-action"/>
+  <text x="165" y="363" class="small">Crear/Editar</text>
+
+  <!-- Acciones Ventas -->
+  <rect x="215" y="345" width="85" height="36" rx="4" class="node-action"/>
+  <text x="257" y="363" class="small">Listar</text>
+  <rect x="310" y="345" width="75" height="36" rx="4" class="node-action"/>
+  <text x="347" y="363" class="small">Registrar</text>
+
+  <!-- Acciones Compras -->
+  <rect x="475" y="345" width="85" height="36" rx="4" class="node-action"/>
+  <text x="517" y="363" class="small">Listar</text>
+  <rect x="570" y="345" width="75" height="36" rx="4" class="node-action"/>
+  <text x="607" y="363" class="small">Registrar</text>
+
+  <!-- Acciones Proveedores -->
+  <rect x="650" y="345" width="90" height="36" rx="4" class="node-action"/>
+  <text x="695" y="363" class="small">Listar</text>
+  <rect x="750" y="345" width="90" height="36" rx="4" class="node-action"/>
+  <text x="795" y="363" class="small">Crear/Editar</text>
+
+  <!-- Flechas módulos → acciones -->
+  <path d="M125,300 L65,345"  class="arrow-sub"/>
+  <path d="M125,300 L165,345" class="arrow-sub"/>
+  <path d="M310,300 L257,345" class="arrow-sub"/>
+  <path d="M310,300 L347,345" class="arrow-sub"/>
+  <path d="M570,300 L517,345" class="arrow-sub"/>
+  <path d="M570,300 L607,345" class="arrow-sub"/>
+  <path d="M755,300 L695,345" class="arrow-sub"/>
+  <path d="M755,300 L795,345" class="arrow-sub"/>
+
+  <!-- ── MODELS (capa de datos) ── -->
+  <rect x="10" y="425" width="860" height="60" rx="8" fill="#1e2435" stroke="#4b5563" stroke-width="1"/>
+  <text x="440" y="445" font-weight="600" font-size="13">Models (Capa de Datos)</text>
+  <text x="150" y="465" class="small">Producto.php</text>
+  <text x="300" y="465" class="small">Venta.php</text>
+  <text x="440" y="465" class="small">Compra.php</text>
+  <text x="580" y="465" class="small">Proveedor.php</text>
+  <text x="740" y="465" class="small">Usuario.php</text>
+
+  <!-- Flechas acciones → models -->
+  <path d="M125,381 L125,425" class="arrow-db"/>
+  <path d="M310,381 L300,425" class="arrow-db"/>
+  <path d="M570,381 L440,425" class="arrow-db"/>
+  <path d="M755,381 L580,425" class="arrow-db"/>
+
+  <!-- ── BASE DE DATOS ── -->
+  <ellipse cx="440" cy="590" rx="200" ry="30" fill="#2d1a1a" stroke="#ef4444" stroke-width="2"/>
+  <ellipse cx="440" cy="580" rx="200" ry="30" fill="#2d1a1a" stroke="#ef4444" stroke-width="2"/>
+  <text x="440" y="578" font-weight="600" font-size="13">PostgreSQL — Railway</text>
+  <text x="440" y="596" class="small">productos · ventas · compras · proveedores · usuarios</text>
+
+  <!-- Flecha Models → BD -->
+  <path d="M440,485 L440,550" class="arrow-db"/>
+
+  <!-- ── LOGOUT ── -->
+  <rect x="700" y="25" width="120" height="50" rx="6" fill="#2d1a1a" stroke="#ef4444" stroke-width="1"/>
+  <text x="760" y="46" font-weight="600" fill="#ef4444">Logout</text>
+  <text x="760" y="62" class="small">Destruye sesión</text>
+  <path d="M760,75 L760,100 Q760,120 700,120" class="arrow-auth" stroke="#ef4444"/>
+</svg>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-box" style="background:#1e3a5f;border-color:#3b82f6"></div> Zona Pública</div>
+  <div class="legend-item"><div class="legend-box" style="background:#1a2e1a;border-color:#22c55e"></div> Zona Privada</div>
+  <div class="legend-item"><div class="legend-box" style="background:#1e2435;border-color:#64748b"></div> Módulos</div>
+  <div class="legend-item"><div class="legend-box" style="background:#2d1a1a;border-color:#ef4444"></div> Base de Datos</div>
+</div>
+
+</body>
+</html>
