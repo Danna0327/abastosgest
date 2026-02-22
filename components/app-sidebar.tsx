@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import {
   LayoutDashboard,
   Package,
@@ -9,6 +9,7 @@ import {
   Truck,
   Users,
   Store,
+  LogOut,
 } from "lucide-react"
 import {
   Sidebar,
@@ -24,35 +25,22 @@ import {
 } from "@/components/ui/sidebar"
 
 const navItems = [
-  {
-    title: "Dashboard",
-    href: "/",
-    icon: LayoutDashboard,
-  },
-  {
-    title: "Inventario",
-    href: "/inventario",
-    icon: Package,
-  },
-  {
-    title: "Ventas",
-    href: "/ventas",
-    icon: ShoppingCart,
-  },
-  {
-    title: "Compras",
-    href: "/compras",
-    icon: Truck,
-  },
-  {
-    title: "Proveedores",
-    href: "/proveedores",
-    icon: Users,
-  },
+  { title: "Dashboard",   href: "/",            icon: LayoutDashboard },
+  { title: "Inventario",  href: "/inventario",  icon: Package },
+  { title: "Ventas",      href: "/ventas",       icon: ShoppingCart },
+  { title: "Compras",     href: "/compras",      icon: Truck },
+  { title: "Proveedores", href: "/proveedores",  icon: Users },
 ]
 
 export function AppSidebar() {
   const pathname = usePathname()
+  const router   = useRouter()
+
+  async function handleLogout() {
+    await fetch("/api/auth/logout", { method: "POST" })
+    router.push("/login")
+    router.refresh()
+  }
 
   return (
     <Sidebar collapsible="icon">
@@ -66,18 +54,17 @@ export function AppSidebar() {
                 </div>
                 <div className="flex flex-col gap-0.5 leading-none">
                   <span className="font-semibold text-sm">AbastosGest</span>
-                  <span className="text-xs text-sidebar-foreground/60">
-                    Sistema de Gestion
-                  </span>
+                  <span className="text-xs text-sidebar-foreground/60">Nancy Market</span>
                 </div>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
+
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Navegacion</SidebarGroupLabel>
+          <SidebarGroupLabel>Navegación</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {navItems.map((item) => (
@@ -102,11 +89,17 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+
       <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton size="sm" className="text-xs text-sidebar-foreground/50">
-              <span>v1.0 - Proyecto Final</span>
+            <SidebarMenuButton
+              onClick={handleLogout}
+              tooltip="Cerrar Sesión"
+              className="text-destructive hover:text-destructive hover:bg-destructive/10 cursor-pointer"
+            >
+              <LogOut />
+              <span>Cerrar Sesión</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
