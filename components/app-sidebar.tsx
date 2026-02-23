@@ -2,28 +2,24 @@
 
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
-import { LayoutDashboard, Package, ShoppingCart, Truck, Users, Store, LogOut } from "lucide-react"
-import {
-  Sidebar, SidebarContent, SidebarFooter, SidebarGroup,
-  SidebarGroupContent, SidebarGroupLabel, SidebarHeader,
-  SidebarMenu, SidebarMenuButton, SidebarMenuItem,
-} from "@/components/ui/sidebar"
+import { LayoutDashboard, Package, ShoppingCart, Truck, Users, Store, LogOut, BarChart3 } from "lucide-react"
+import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar"
 import { useSession } from "@/hooks/use-session"
 
 const allNavItems = [
-  { title: "Dashboard",   href: "/",            icon: LayoutDashboard, adminOnly: false },
-  { title: "Inventario",  href: "/inventario",  icon: Package,         adminOnly: false },
-  { title: "Ventas",      href: "/ventas",       icon: ShoppingCart,    adminOnly: false },
-  { title: "Compras",     href: "/compras",      icon: Truck,           adminOnly: false },
-  { title: "Proveedores", href: "/proveedores",  icon: Users,           adminOnly: true  },
+  { title: "Dashboard",   href: "/",           icon: LayoutDashboard, adminOnly: false },
+  { title: "Inventario",  href: "/inventario", icon: Package,         adminOnly: false },
+  { title: "Ventas",      href: "/ventas",      icon: ShoppingCart,   adminOnly: false },
+  { title: "Compras",     href: "/compras",     icon: Truck,          adminOnly: false },
+  { title: "Proveedores", href: "/proveedores", icon: Users,          adminOnly: true  },
+  { title: "Reportes",    href: "/reportes",    icon: BarChart3,      adminOnly: true  },
 ]
 
 export function AppSidebar() {
-  const pathname    = usePathname()
-  const router      = useRouter()
+  const pathname = usePathname()
+  const router   = useRouter()
   const { user, isAdmin } = useSession()
 
-  // Filtrar items según el rol
   const navItems = allNavItems.filter(item => !item.adminOnly || isAdmin)
 
   async function handleLogout() {
@@ -57,17 +53,10 @@ export function AppSidebar() {
           <SidebarGroupLabel>Navegación</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {navItems.map((item) => (
+              {navItems.map(item => (
                 <SidebarMenuItem key={item.href}>
-                  <SidebarMenuButton
-                    asChild
-                    isActive={item.href === "/" ? pathname === "/" : pathname.startsWith(item.href)}
-                    tooltip={item.title}
-                  >
-                    <Link href={item.href}>
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </Link>
+                  <SidebarMenuButton asChild isActive={item.href === "/" ? pathname === "/" : pathname.startsWith(item.href)} tooltip={item.title}>
+                    <Link href={item.href}><item.icon /><span>{item.title}</span></Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
@@ -78,7 +67,6 @@ export function AppSidebar() {
 
       <SidebarFooter>
         <SidebarMenu>
-          {/* Usuario activo */}
           {user && (
             <SidebarMenuItem>
               <SidebarMenuButton size="lg" className="cursor-default">
@@ -92,15 +80,9 @@ export function AppSidebar() {
               </SidebarMenuButton>
             </SidebarMenuItem>
           )}
-          {/* Cerrar sesión */}
           <SidebarMenuItem>
-            <SidebarMenuButton
-              onClick={handleLogout}
-              tooltip="Cerrar Sesión"
-              className="text-destructive hover:text-destructive hover:bg-destructive/10 cursor-pointer"
-            >
-              <LogOut />
-              <span>Cerrar Sesión</span>
+            <SidebarMenuButton onClick={handleLogout} tooltip="Cerrar Sesión" className="text-destructive hover:text-destructive hover:bg-destructive/10 cursor-pointer">
+              <LogOut /><span>Cerrar Sesión</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
