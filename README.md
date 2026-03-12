@@ -10,7 +10,7 @@
 | Recurso | URL |
 |---------|-----|
 | **Demo en producción** | https://abastosgest-production.up.railway.app |
-| **Repositorio GitHub** | https://github.com/tu-usuario/abastosgest |
+| **Repositorio GitHub** | [https://github.com/Danna0327/abastosgest]|
 | **Respaldo de Base de Datos** | [`scripts/001-create-tables.sql`](scripts/001-create-tables.sql) |
 | **Datos de prueba** | [`scripts/002-seed-data.sql`](scripts/002-seed-data.sql) |
 
